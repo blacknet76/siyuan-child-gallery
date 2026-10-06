@@ -1,0 +1,19 @@
+{
+  "galleryName": "Child Gallery",
+  "invalidConfig": "This gallery configuration is invalid or uses an unsupported version. Its saved content has been preserved.",
+  "contextUnavailable": "Document context unavailable",
+  "loadingChildren": "Loading child documents…",
+  "noChildren": "No child documents",
+  "childrenUnavailable": "Child documents could not be loaded",
+  "openUnavailable": "This document could not be opened",
+  "untitledDocument": "Untitled document",
+  "gallerySettings": "Gallery settings",
+  "cardLayout": "Card layout",
+  "vertical": "Vertical",
+  "horizontal": "Horizontal",
+  "columns": "Columns",
+  "automatic": "Automatic",
+  "depth": "Depth",
+  "showPreviews": "Show previews",
+  "settingsUnavailable": "Gallery settings could not be saved. The saved content has been preserved."
+}

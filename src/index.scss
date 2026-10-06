@@ -1,0 +1,258 @@
+@use "sass:list";
+
+.child-gallery {
+  container-type: inline-size;
+  padding: 12px;
+  border: 1px solid var(--b3-border-color);
+  border-radius: var(--b3-border-radius);
+  color: var(--b3-theme-on-background);
+  background: var(--b3-theme-background);
+
+  p {
+    margin: 4px 0 0;
+  }
+
+  &__notice {
+    color: var(--b3-theme-on-surface);
+    font-size: 0.875em;
+  }
+
+  &__notice:empty {
+    display: none;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  &__settings {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 5px;
+    border: 0;
+    border-radius: var(--b3-border-radius);
+    background: transparent;
+    color: var(--b3-theme-on-surface);
+    cursor: pointer;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+    &:hover {
+      background: var(--b3-theme-surface);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--b3-theme-primary);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  &__card {
+    container-type: inline-size;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    align-content: start;
+    padding: 0;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--b3-border-color);
+    border-radius: var(--b3-border-radius);
+    background: var(--b3-theme-background);
+    color: var(--b3-theme-on-background);
+    font: inherit;
+    text-align: start;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--b3-theme-surface);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--b3-theme-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__media {
+    display: block;
+    width: 100%;
+    height: 8rem;
+    background: var(--b3-theme-surface);
+  }
+
+  &__image {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__media[data-media-state="loading"] &__image {
+    opacity: 0;
+  }
+
+  &__media[data-media-state="cover"] {
+    background-image: none;
+  }
+
+  &__media[data-media-state="contained"] &__image {
+    padding: 0.75rem;
+    object-fit: scale-down;
+  }
+
+  &__fallback {
+    // Controlled decorative colors; the host surface gently adapts them to each theme.
+    $palettes: (
+      (#527bc2, #7773bc, #a083c2),
+      (#58afc1, #578cc0, #6777b9),
+      (#438f8e, #65a98d, #8cb78b),
+      (#78a86b, #55ab94, #549db1),
+      (#8370b6, #ad72ac, #c98ca9),
+      (#c58ba9, #a77bb5, #7f7bb7),
+      (#df9b72, #d47d78, #ba6c85),
+      (#d9b768, #dda078, #cb816c),
+      (#e1ad97, #d18c99, #ae819c),
+      (#71899e, #678eae, #709fb8),
+      (#85b5af, #74a4bd, #8a93bd),
+      (#a6b579, #b9b076, #c49f7b),
+      (#b192bf, #8d8abd, #779fc0),
+      (#d6a68e, #c1a078, #abb584)
+    );
+    @for $palette from 1 through list.length($palettes) {
+      $colors: list.nth($palettes, $palette);
+      &[data-cover-palette="#{$palette}"] {
+        --child-gallery-cover-start: color-mix(in srgb, #{list.nth($colors, 1)} 88%, var(--b3-theme-surface));
+        --child-gallery-cover-middle: color-mix(in srgb, #{list.nth($colors, 2)} 88%, var(--b3-theme-surface));
+        --child-gallery-cover-end: color-mix(in srgb, #{list.nth($colors, 3)} 88%, var(--b3-theme-surface));
+      }
+    }
+    pointer-events: none;
+    background-image: linear-gradient(
+      var(--child-gallery-cover-angle),
+      var(--child-gallery-cover-start) 0%,
+      var(--child-gallery-cover-middle) var(--child-gallery-cover-stop),
+      var(--child-gallery-cover-end) 100%
+    );
+  }
+
+  &__title {
+    display: block;
+    padding: 12px;
+    font-weight: 600;
+  }
+
+  &__description {
+    align-self: start;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    margin: 0 12px 12px;
+    font-size: 0.875em;
+    line-height: 1.5;
+    color: var(--b3-theme-on-surface);
+  }
+}
+
+// Explicit preferences cap the responsive column count; they never create tiny fixed tracks.
+@for $columns from 1 through 4 {
+  .child-gallery[data-columns="#{$columns}"] .child-gallery__grid {
+    grid-template-columns:
+      repeat(auto-fill, minmax(min(100%, max(12rem, calc((100% - (#{$columns} - 1) * 8px) / #{$columns}))), 1fr));
+  }
+}
+
+.child-gallery[data-orientation="horizontal"] .child-gallery__grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+@for $columns from 1 through 4 {
+  .child-gallery[data-orientation="horizontal"][data-columns="#{$columns}"] .child-gallery__grid {
+    grid-template-columns:
+      repeat(auto-fill, minmax(min(100%, max(20rem, calc((100% - (#{$columns} - 1) * 8px) / #{$columns}))), 1fr));
+  }
+}
+
+.child-gallery[data-orientation="horizontal"] .child-gallery__card {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+.child-gallery[data-orientation="horizontal"] .child-gallery__card > * {
+  grid-column: 1 / -1;
+}
+
+// Descendant container queries use each card's available width, including split panes.
+@container (min-width: 18rem) {
+  .child-gallery[data-orientation="horizontal"] .child-gallery__media {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: min(8rem, 32cqw);
+    height: 8rem;
+    min-height: 8rem;
+    align-self: start;
+  }
+  .child-gallery[data-orientation="horizontal"] .child-gallery__media ~ .child-gallery__title {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .child-gallery[data-orientation="horizontal"] .child-gallery__media ~ .child-gallery__description {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+// Nested lists own their responsive sibling tracks; only our gallery subtree is styled.
+.child-gallery__group {
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+}
+.child-gallery__branch {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  > .child-gallery__card {
+    width: 100%;
+  }
+}
+.child-gallery__nested {
+  margin-top: 8px;
+  padding-inline-start: min(8px, 2cqw);
+  border-inline-start: 1px solid var(--b3-border-color);
+
+  .child-gallery__title {
+    padding: 10px;
+  }
+  .child-gallery__description {
+    margin: 0 10px 10px;
+  }
+  .child-gallery__media {
+    height: 6rem;
+  }
+}
+@container (min-width: 18rem) {
+  .child-gallery[data-orientation="horizontal"] .child-gallery__nested .child-gallery__media {
+    width: min(6rem, 32cqw);
+    height: 6rem;
+    min-height: 6rem;
+  }
+}

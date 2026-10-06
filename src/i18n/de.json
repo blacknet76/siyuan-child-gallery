@@ -1,0 +1,19 @@
+{
+  "galleryName": "Unterseiten-Galerie",
+  "invalidConfig": "Die Galerie-Konfiguration ist ungültig oder verwendet eine nicht unterstützte Version. Der gespeicherte Inhalt bleibt erhalten.",
+  "contextUnavailable": "Dokumentkontext nicht verfügbar",
+  "loadingChildren": "Unterseiten werden geladen…",
+  "noChildren": "Keine Unterseiten",
+  "childrenUnavailable": "Unterseiten konnten nicht geladen werden",
+  "openUnavailable": "Dieses Dokument konnte nicht geöffnet werden",
+  "untitledDocument": "Unbenanntes Dokument",
+  "gallerySettings": "Galerie-Einstellungen",
+  "cardLayout": "Kartendarstellung",
+  "vertical": "Vertikal",
+  "horizontal": "Horizontal",
+  "columns": "Spalten",
+  "automatic": "Automatisch",
+  "depth": "Tiefe",
+  "showPreviews": "Vorschauen anzeigen",
+  "settingsUnavailable": "Galerie-Einstellungen konnten nicht gespeichert werden. Der gespeicherte Inhalt bleibt erhalten."
+}

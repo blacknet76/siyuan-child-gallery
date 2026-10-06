@@ -1,0 +1,34 @@
+{
+  "name": "siyuan-child-gallery",
+  "author": "blacknet76",
+  "url": "https://github.com/blacknet76/siyuan-child-gallery",
+  "version": "0.1.0",
+  "minAppVersion": "3.8.3",
+  "backends": [
+    "all"
+  ],
+  "frontends": [
+    "all"
+  ],
+  "disabledInPublish": true,
+  "displayName": {
+    "default": "Child Gallery",
+    "en": "Child Gallery",
+    "de": "Unterseiten-Galerie"
+  },
+  "description": {
+    "default": "Dynamic preview cards for child documents at depths 1–3, grouped in their native hierarchy.",
+    "de": "Dynamische Vorschaukarten für Unterseiten bis Tiefe 3, gruppiert in ihrer ursprünglichen Hierarchie."
+  },
+  "readme": {
+    "default": "README.siyuan.md",
+    "de": "README.siyuan.de-DE.md"
+  },
+  "keywords": [
+    "gallery",
+    "child",
+    "children",
+    "unterseiten",
+    "galerie"
+  ]
+}
